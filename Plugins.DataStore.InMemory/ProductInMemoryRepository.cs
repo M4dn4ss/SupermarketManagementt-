@@ -23,6 +23,24 @@ namespace Plugins.DataStore.InMemory
                 new Product {ProductId = 3, CategoryId = 2, Name = "White Bread",Quantity = 300, Price = 1.50},
             };
         }
+
+        public void AddProduct(Product product)
+        {
+            if (products.Any(x => x.Name.Equals(category.Name, StringComparison.OrdinalIgnoreCase))) return;
+
+            if (products != null && products.Count > 0)
+            {
+                var maxId = products.Max(x => x.CategoryId);
+                category.CategoryId = maxId + 1;
+            }
+            else
+            {
+                category.CategoryId = 1;
+            }
+
+            categories.Add(category);
+        }
+
         public IEnumerable<Product> GetProducts()
         {
             return products;

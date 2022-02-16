@@ -20,7 +20,7 @@ namespace Plugins.DataStore.InMemory
                 new Product {ProductId = 1, CategoryId = 1, Name = "Iced Tea",Quantity = 100, Price = 1.99},
                 new Product {ProductId = 2, CategoryId = 1, Name = "Canada Dry",Quantity = 200, Price = 1.99},
                 new Product {ProductId = 3, CategoryId = 2, Name = "Whole Wheat Bread",Quantity = 300, Price = 1.50},
-                new Product {ProductId = 3, CategoryId = 2, Name = "White Bread",Quantity = 300, Price = 1.50},
+                new Product {ProductId = 4, CategoryId = 2, Name = "White Bread",Quantity = 300, Price = 1.50},
             };
         }
 
@@ -83,6 +83,12 @@ namespace Plugins.DataStore.InMemory
         public Product GetProductById(int productId)
         {
             return products.FirstOrDefault(x => x.ProductId == productId);
+        }
+
+        public void DeleteProduct(int productId)
+        {
+            var productToDelete = GetProductById(productId);
+            if(productToDelete != null) products.Remove(productToDelete);
         }
     }
 }

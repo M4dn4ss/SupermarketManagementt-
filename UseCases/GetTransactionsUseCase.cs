@@ -4,22 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using UseCases.DataStorePluginInterfaces;
 
 namespace UseCases
 {
-    public class GetTodayTransactionsUseCase : IGetTodayTransactionsUseCase
+    public class GetTransactionsUseCase : IGetTransactionsUseCase
     {
         private readonly ITransactionRepository transactionRepository;
 
-        public GetTodayTransactionsUseCase(ITransactionRepository transactionRepository)
+        public GetTransactionsUseCase(ITransactionRepository transactionRepository)
         {
             this.transactionRepository = transactionRepository;
         }
-        public IEnumerable<Transaction> Execute(string cashierName)
+        public IEnumerable<Transaction> Execute(
+            string cashierName,
+            DateTime startDate,
+            DateTime endDate)
         {
-            return transactionRepository.GetByDay(cashierName, date: DateTime.Now);
+            return transactionRepository.Search(cashierName, startDate, endDate);
         }
     }
 }
